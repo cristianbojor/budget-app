@@ -12,6 +12,7 @@ import com.fbojor.college.budget.model.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TransactionListActivity extends ListActivity {
     private final List<Transaction> transactions = Transaction.getRandomList();
@@ -21,23 +22,15 @@ public class TransactionListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_list);
 
-        List<String> listValues = getStringValues(transactions);
+        List<String> listValues = transactions.stream()
+                .map(Transaction::toString)
+                .collect(Collectors.toList());
 
         ArrayAdapter<String> myAdapter =
                 new ArrayAdapter<>(this, R.layout.row_layout, R.id.transactionListItem, listValues);
 
         setListAdapter(myAdapter);
 
-    }
-
-    private List<String> getStringValues(List<Transaction> transactions) {
-        List<String> result = new ArrayList<>();
-
-        for (Transaction transaction : transactions) {
-            result.add(transaction.toString());
-        }
-
-        return result;
     }
 
 
