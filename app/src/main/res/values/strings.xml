@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Budget</string>
-    <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="button_submit">Submit</string>
+    <string name="button_viewTransactionList">Transaction list</string>
 </resources>
