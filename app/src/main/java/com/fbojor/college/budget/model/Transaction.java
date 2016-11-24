@@ -1,28 +1,28 @@
 package com.fbojor.college.budget.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by fbojor on 23.11.2016.
  */
 
 public class Transaction {
+    private static List<Transaction> all;
+
     private final Long id;
-    private final Date date;
     private final Double sum;
     private final String details;
 
-    public Transaction(Long id, Date date, Double sum, String details) {
+    public Transaction(Long id, Double sum, String details) {
         this.id = id;
-        this.date = date;
         this.sum = sum;
         this.details = details;
-    }
-
-    public Date getDate() {
-        return date;
     }
 
     public Double getSum() {
@@ -37,23 +37,36 @@ public class Transaction {
         return id;
     }
 
-    public static List<Transaction> getRandomList() {
-        List<Transaction> result = new ArrayList<>();
+    public static List<Transaction> getAll() {
+        if (all == null) {
+            initAll();
+        }
+        return all;
 
-        result.add(new Transaction(1L, new Date(), 25d, "Shopping"));
-        result.add(new Transaction(2L, new Date(), 10.2d, "Fuel"));
-        result.add(new Transaction(3L, new Date(), 646.2d, "Home"));
-        result.add(new Transaction(4L, new Date(), 252d, "Products"));
-        result.add(new Transaction(5L, new Date(), 6367d, "Food"));
-        result.add(new Transaction(6L, new Date(), 636d, "Clothes"));
+    }
 
-        return result;
+    private static void initAll() {
+        all = Arrays.asList(
+                new Transaction(1L, 25d, "Shopping"),
+                new Transaction(2L, 10.2d, "Fuel"),
+                new Transaction(3L, 646.2d, "Home"),
+                new Transaction(4L, 252d, "Products"),
+                new Transaction(5L, 6367d, "Food"),
+                new Transaction(6L, 636d, "Clothes")
+        );
     }
 
     @Override
     public String toString() {
-        return "date: " + date +
-                ", sum: " + sum +
-                ", details: " + details;
+        return "sum: " + sum + ", details: " + details;
+    }
+
+    public static void update(Transaction newTransaction) {
+        all = getAll().stream()
+                .filter(t -> !t.getId().equals(newTransaction.getId()))
+                .collect(Collectors.toList());
+
+        all.add(newTransaction);
+        all.sort(Comparator.comparing(Transaction::getId));
     }
 }

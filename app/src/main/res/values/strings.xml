@@ -4,4 +4,8 @@
     <string name="password">Password</string>
     <string name="button_submit">Submit</string>
     <string name="button_viewTransactionList">Transaction list</string>
+    <string name="transaction_sum">Sum</string>
+    <string name="transaction_details">Details</string>
+    <string name="transaction_date">Date</string>
+    <string name="button_save">Save</string>
 </resources>

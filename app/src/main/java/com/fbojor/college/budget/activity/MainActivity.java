@@ -1,11 +1,12 @@
-package com.fbojor.college.budget;
+package com.fbojor.college.budget.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import com.fbojor.college.budget.R;
 
 import de.cketti.mailto.EmailIntentBuilder;
 
