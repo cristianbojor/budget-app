@@ -5,11 +5,14 @@ package com.fbojor.college.budget.model;
  */
 
 public class Transaction {
-    private final Long id;
-    private final Double sum;
-    private final String details;
+    private String id;
+    private Double sum;
+    private String details;
 
-    public Transaction(Long id, Double sum, String details) {
+    public Transaction() {
+    }
+
+    public Transaction(String id, Double sum, String details) {
         this.id = id;
         this.sum = sum;
         this.details = details;
@@ -19,12 +22,24 @@ public class Transaction {
         return sum;
     }
 
+    public void setSum(Double sum) {
+        this.sum = sum;
+    }
+
     public String getDetails() {
         return details;
     }
 
-    public Long getId() {
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

@@ -7,19 +7,19 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.fbojor.college.budget.R;
+import com.fbojor.college.budget.model.FirebaseTransactionRepository;
 import com.fbojor.college.budget.model.Transaction;
-import com.fbojor.college.budget.model.TransactionRepository;
 
 public class EditTransactionActivity extends AppCompatActivity {
     private EditText sum;
     private EditText details;
     private Transaction transaction;
-    private TransactionRepository repository;
+    private FirebaseTransactionRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        repository = new TransactionRepository(getApplicationContext());
+        repository = new FirebaseTransactionRepository(getApplicationContext());
 
         setContentView(R.layout.activity_edit_transaction);
 
@@ -30,11 +30,12 @@ public class EditTransactionActivity extends AppCompatActivity {
         details = (EditText) findViewById(R.id.details);
 
         if (intent.hasExtra(TransactionListActivity.TRANSACTION_ID)) {
-            long transactionId = intent.getLongExtra(TransactionListActivity.TRANSACTION_ID, 0);
-            transaction = repository.getById(transactionId);
-
-            sum.setText(transaction.getSum().toString());
-            details.setText(transaction.getDetails());
+            //// TODO: 19.01.2017
+//            long transactionId = intent.getLongExtra(TransactionListActivity.TRANSACTION_ID, 0);
+//            transaction = repository.getById(transactionId);
+//
+//            sum.setText(transaction.getSum().toString());
+//            details.setText(transaction.getDetails());
         }
     }
 
@@ -44,16 +45,16 @@ public class EditTransactionActivity extends AppCompatActivity {
                 Double.valueOf(sum.getText().toString()),
                 details.getText().toString()
         );
-        repository.save(newTransaction);
+        repository.add(newTransaction);
 
         Intent intent = new Intent(this, TransactionListActivity.class);
         startActivity(intent);
     }
 
 
-    @Override
-    protected void onDestroy() {
-        repository.close();
-        super.onDestroy();
-    }
+//    @Override
+//    protected void onDestroy() {
+//        repository.close();
+//        super.onDestroy();
+//    }
 }

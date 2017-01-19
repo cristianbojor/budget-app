@@ -7,21 +7,22 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.fbojor.college.budget.R;
+import com.fbojor.college.budget.model.FirebaseTransactionRepository;
 import com.fbojor.college.budget.model.Transaction;
-import com.fbojor.college.budget.model.TransactionRepository;
 import com.fbojor.college.budget.util.ArrayAdapter;
+import com.fbojor.college.budget.util.ListEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class TransactionListActivity extends ListActivity {
+public class TransactionListActivity extends ListActivity implements ListEventListener<Transaction> {
     public final static String TRANSACTION_ID = "transaction_id";
-    private TransactionRepository repository;
+    private FirebaseTransactionRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        repository = new TransactionRepository(getApplicationContext());
+        repository = new FirebaseTransactionRepository(getApplicationContext());
 
         setContentView(R.layout.activity_transaction_list);
 
@@ -46,20 +47,9 @@ public class TransactionListActivity extends ListActivity {
     }
 
     private void initAdapter() {
-        List<Transaction> listValues = repository.getAll();
-
-        ArrayAdapter myAdapter =
-                new ArrayAdapter(this, R.layout.row_layout, R.id.transactionListItem, listValues);
-
-        setListAdapter(myAdapter);
-
+        repository.getAll(this);
     }
 
-    @Override
-    protected void onDestroy() {
-        repository.close();
-        super.onDestroy();
-    }
 
     public void addTransaction(View view) {
         Intent intent = new Intent(this, EditTransactionActivity.class);
@@ -68,5 +58,14 @@ public class TransactionListActivity extends ListActivity {
 
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
+    }
+
+    @Override
+    public void onSuccess(List<Transaction> elements) {
+        ArrayAdapter myAdapter =
+                new ArrayAdapter(this, R.layout.row_layout, R.id.transactionListItem, elements);
+
+        setListAdapter(myAdapter);
+
     }
 }
