@@ -10,6 +10,7 @@ import com.fbojor.college.budget.R;
 import com.fbojor.college.budget.model.Transaction;
 import com.fbojor.college.budget.model.TransactionRepository;
 import com.fbojor.college.budget.util.ArrayAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -63,5 +64,9 @@ public class TransactionListActivity extends ListActivity {
     public void addTransaction(View view) {
         Intent intent = new Intent(this, EditTransactionActivity.class);
         startActivity(intent);
+    }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
     }
 }

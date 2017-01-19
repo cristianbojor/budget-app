@@ -9,4 +9,6 @@
     <string name="transaction_date">Date</string>
     <string name="button_save">Save</string>
     <string name="button_add">Add</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="button_logout">logout</string>
 </resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "227602636091",
+    "firebase_url": "https://budget-android-7155d.firebaseio.com",
+    "project_id": "budget-android-7155d",
+    "storage_bucket": "budget-android-7155d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227602636091:android:ec30f8afa9b62d7d",
+        "android_client_info": {
+          "package_name": "com.fbojor.college.budget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227602636091-9eoe4a5slrn9inmnck13fhv5cmibvtc9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fbojor.college.budget",
+            "certificate_hash": "14515A373EDD31AEE08413BFEA59BDAB06541756"
+          }
+        },
+        {
+          "client_id": "227602636091-gramtqnt1q798f4a6hpmitd6sol878th.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSCFRWXxn13zof-5zBcOZUAEvM7f-GEvw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227602636091-gramtqnt1q798f4a6hpmitd6sol878th.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
