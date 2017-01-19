@@ -10,12 +10,12 @@ import com.fbojor.college.budget.R;
 import com.fbojor.college.budget.model.FirebaseTransactionRepository;
 import com.fbojor.college.budget.model.Transaction;
 import com.fbojor.college.budget.util.ArrayAdapter;
-import com.fbojor.college.budget.util.ListEventListener;
+import com.fbojor.college.budget.util.EventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class TransactionListActivity extends ListActivity implements ListEventListener<Transaction> {
+public class TransactionListActivity extends ListActivity implements EventListener<List<Transaction>> {
     public final static String TRANSACTION_ID = "transaction_id";
     private FirebaseTransactionRepository repository;
 

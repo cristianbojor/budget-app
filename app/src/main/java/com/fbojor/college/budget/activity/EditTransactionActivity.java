@@ -9,8 +9,9 @@ import android.widget.EditText;
 import com.fbojor.college.budget.R;
 import com.fbojor.college.budget.model.FirebaseTransactionRepository;
 import com.fbojor.college.budget.model.Transaction;
+import com.fbojor.college.budget.util.EventListener;
 
-public class EditTransactionActivity extends AppCompatActivity {
+public class EditTransactionActivity extends AppCompatActivity implements EventListener<Transaction> {
     private EditText sum;
     private EditText details;
     private Transaction transaction;
@@ -30,12 +31,8 @@ public class EditTransactionActivity extends AppCompatActivity {
         details = (EditText) findViewById(R.id.details);
 
         if (intent.hasExtra(TransactionListActivity.TRANSACTION_ID)) {
-            //// TODO: 19.01.2017
-//            long transactionId = intent.getLongExtra(TransactionListActivity.TRANSACTION_ID, 0);
-//            transaction = repository.getById(transactionId);
-//
-//            sum.setText(transaction.getSum().toString());
-//            details.setText(transaction.getDetails());
+            String transactionId = intent.getStringExtra(TransactionListActivity.TRANSACTION_ID);
+            repository.get(transactionId, this);
         }
     }
 
@@ -49,6 +46,24 @@ public class EditTransactionActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, TransactionListActivity.class);
         startActivity(intent);
+    }
+
+    public void delete(View view) {
+        repository.delete(transaction);
+        Intent intent = new Intent(this, TransactionListActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onSuccess(Transaction data) {
+        Intent intent = getIntent();
+        if (intent.hasExtra(TransactionListActivity.TRANSACTION_ID)) {
+            transaction = data;
+
+            sum.setText(transaction.getSum().toString());
+            details.setText(transaction.getDetails());
+        }
     }
 
 
